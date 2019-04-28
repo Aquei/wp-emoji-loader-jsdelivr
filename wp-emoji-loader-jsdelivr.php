@@ -25,10 +25,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 //current ver
-define('WP_EMOJI_LOADER_JSDELIVR', '1.0.0');
+define('WP_EMOJI_LOADER_JSDELIVR', '1.0.1');
 
 function enqueue_emoji_detection_script(){
-	wp_enqueue_script('external-emoji-loader-script', "https://cdn.jsdelivr.net/combine/gh/Aquei/wp-emoji-loader-jsdelivr@1.0.0/wpemojisettings-jsdelivr.js,gh/WordPress/WordPress@{$wp_version}/wp-includes/js/wp-emoji-loader.min.js", [], null);
+	global $wp_version;
+	$v = WP_EMOJI_LOADER_JSDELIVR;
+	wp_enqueue_script('external-emoji-loader-script', "https://cdn.jsdelivr.net/combine/gh/Aquei/wp-emoji-loader-jsdelivr@{$v}/wpemojisettings-jsdelivr.js,gh/WordPress/WordPress@{$wp_version}/wp-includes/js/wp-emoji-loader.min.js", [], null);
 
 	add_filter("script_loader_tag", "nonblocking_emoji_detection_script", 10, 2); 
 }
@@ -42,7 +44,8 @@ function nonblocking_emoji_detection_script($tag, $handle){
 }
 
 function enqueue_emoji_style(){
-	wp_enqueue_style('external-emoji-style', "https://cdn.jsdelivr.net/combine/gh/Aquei/wp-emoji-loader-jsdelivr@1.0.0/wp-emoji-style.min.css", [], null);
+	$v = WP_EMOJI_LOADER_JSDELIVR;
+	wp_enqueue_style('external-emoji-style', "https://cdn.jsdelivr.net/gh/Aquei/wp-emoji-loader-jsdelivr@{$v}/wp-emoji-style.min.css", [], null);
 }
 
 
