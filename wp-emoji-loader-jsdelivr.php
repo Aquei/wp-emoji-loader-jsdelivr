@@ -26,18 +26,29 @@ if ( ! defined( 'WPINC' ) ) {
 
 //current ver
 define('WP_EMOJI_LOADER_JSDELIVR', '1.0.1');
+define('WP_EMOJI_LOADER_CSS_SRI', 'sha384-aHPMlpryKagTvII2PgTxfUT/QHQRf3VzzS8OGlcuiRaxoclf/IymCrwcYDyL0aLZ');
 
 function enqueue_emoji_detection_script(){
 	global $wp_version;
 	$v = WP_EMOJI_LOADER_JSDELIVR;
 	wp_enqueue_script('external-emoji-loader-script', "https://cdn.jsdelivr.net/combine/gh/Aquei/wp-emoji-loader-jsdelivr@{$v}/wpemojisettings-jsdelivr.js,gh/WordPress/WordPress@{$wp_version}/wp-includes/js/wp-emoji-loader.min.js", [], null);
 
-	add_filter("script_loader_tag", "nonblocking_emoji_detection_script", 10, 2); 
+	add_filter("script_loader_tag", "nonblocking_emoji_detection_script", 10, 2);
+	add_filter("style_loader_tag", "add_sri_emoji_style", 10, 2);
 }
 
 function nonblocking_emoji_detection_script($tag, $handle){
 	if($handle === "external-emoji-loader-script" && strpos($tag, " async") === false){
 		return str_replace(" src=", " async defer src=", $tag);
+	}else{
+		return $tag;
+	}
+}
+
+function add_sri_emoji_style($tag, $handle){
+	if($handle === "external-emoji-style"){
+		$sri = WP_EMOJI_LOADER_CSS_SRI;
+		return str_replace(" href=", " integrity='{$sri}' crossorigin href=", $tag);
 	}else{
 		return $tag;
 	}
