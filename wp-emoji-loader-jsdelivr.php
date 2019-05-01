@@ -10,7 +10,7 @@
  * Plugin Name:       wp-emoji-loader-jsdelivr
  * Plugin URI:        https://github.com/Aquei/wp-emoji-loader-jsdelivr
  * Description:       emojiのコードをjsdelivrから読み込む
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Aquei
  * Author URI:        https://blog.srytk.com/aquei/
  * License:           GPL-3.0+
@@ -25,13 +25,13 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 //current ver
-define('WP_EMOJI_LOADER_JSDELIVR', '1.0.2');
+define('WP_EMOJI_LOADER_JSDELIVR', '1.0.3');
 define('WP_EMOJI_LOADER_CSS_SRI', 'sha384-aHPMlpryKagTvII2PgTxfUT/QHQRf3VzzS8OGlcuiRaxoclf/IymCrwcYDyL0aLZ');
 
 function enqueue_emoji_detection_script(){
 	global $wp_version;
 	$v = WP_EMOJI_LOADER_JSDELIVR;
-	wp_enqueue_script('external-emoji-loader-script', "https://cdn.jsdelivr.net/combine/gh/Aquei/wp-emoji-loader-jsdelivr@{$v}/wpemojisettings-jsdelivr.js,gh/WordPress/WordPress@{$wp_version}/wp-includes/js/wp-emoji-loader.min.js", [], null);
+	wp_enqueue_script('external-emoji-loader-script', "https://cdn.jsdelivr.net/combine/gh/Aquei/wp-emoji-loader-jsdelivr@{$v}/wpemojisettings-jsdelivr.min.js,gh/WordPress/WordPress@{$wp_version}/wp-includes/js/wp-emoji-loader.min.js", [], null);
 
 	add_filter("script_loader_tag", "nonblocking_emoji_detection_script", 10, 2);
 	add_filter("style_loader_tag", "add_sri_emoji_style", 10, 2);
