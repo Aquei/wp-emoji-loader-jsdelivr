@@ -10,7 +10,7 @@
  * Plugin Name:       wp-emoji-loader-jsdelivr
  * Plugin URI:        https://github.com/Aquei/wp-emoji-loader-jsdelivr
  * Description:       emojiのコードをjsdelivrから読み込む
- * Version:           1.0.4
+ * Version:           1.0.6
  * Author:            Aquei
  * Author URI:        https://blog.srytk.com/aquei/
  * License:           GPL-3.0+
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 //current ver
-define('WP_EMOJI_LOADER_JSDELIVR', '1.0.4');
+define('WP_EMOJI_LOADER_JSDELIVR', '1.0.6');
 define('WP_EMOJI_LOADER_CSS_SRI', 'sha384-aHPMlpryKagTvII2PgTxfUT/QHQRf3VzzS8OGlcuiRaxoclf/IymCrwcYDyL0aLZ');
 
 function enqueue_emoji_detection_script(){
